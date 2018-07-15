@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>Froogo | Trade</title>
+
+        {{ template "global-css" . }}
+
+        {{ template "global-meta" . }}
+    </head>
+
+    <body>
+        {{ template "navbar" . }}
+
+        <br>
+        <div class="container">
+            <p class="flow-text">Trade {{ .Item.MarketName }}</p>
+
+            {{ if .Inspectable }}
+                <p>Float: {{ .FloatAPI.Iteminfo.Floatvalue }}</p>
+            {{ end }}
+            <p>Estimated Points Value: {{ .EstimatedPoints }}</p>
+            <img src="https://steamcommunity-a.akamaihd.net/economy/image/{{ .Item.IconURL }}">
+
+            <div class="row" class="col s12">
+                <div class="input-field col s12">
+                    <input id="user" type="text" class="validate" autocomplete="off" required>
+                    <label>Username of who you would like to trade this item to</label>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="points" value="{{ .EstimatedPoints }}" type="number" class="validate" autocomplete="off" required>
+                        <label>Points you would like in exchange for this item</label>
+                    </div>
+                </div>
+                <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">
+                    Send Offer<i class="material-icons right">send</i>
+                </button>
+         </div>
+
+        {{ template "global-js" . }}
+        <script async type="text/javascript" src="/js/trade.js?v6"></script>
+    </body>
+</html>

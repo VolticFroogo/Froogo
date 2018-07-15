@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>Froogo | Trade Offers</title>
+
+        {{ template "global-css" . }}
+
+        {{ template "global-meta" . }}
+    </head>
+
+    <body>
+        {{ template "navbar" . }}
+
+        <br>
+        <div class="container">
+            <p class="flow-text">Trade Offers</p>
+            {{ range .Offers }}
+                <p class="trade-offer" data-id="{{ .ID }}">
+                    <span class="status">{{ if (eq .Status 0) }}Offer pending{{ else if (eq .Status 1) }}Offer accepted{{ end }}</span><br>
+                    {{ if .FromUser $.User.UUID }}Trade from you to {{ .OtherUsername }}{{ else }}Trade from {{ .OtherUsername }} to you{{ end }}<br>
+                    {{ if .FromUser $.User.UUID }}You will give {{ .OtherUsername }} your{{ else }}{{ .OtherUsername }} will give you their{{ end }}: {{ .Item.MarketName }}<br>
+                    {{ if .FromUser $.User.UUID }}{{ .OtherUsername }} will give you {{ .Points }} points{{ else }}You will give {{ .OtherUsername }} {{ .Points }} points{{ end }}<br>
+                    Float: {{ .FloatAPI.Iteminfo.Floatvalue }}<br>
+                    Paint seed: {{ .FloatAPI.Iteminfo.Paintseed }}<br>
+                    {{ if (eq .Status 0) }}
+                        {{ if .FromUser $.User.UUID }}
+                            <a class="waves-effect waves-light btn red cancel-button">Cancel trade<i class="material-icons right">delete_forever</i></a>
+                        {{ else }}
+                            <a class="waves-effect waves-light btn accept-button">Accept Trade<i class="material-icons right">check_circle</i></a>
+                            <a class="waves-effect waves-light btn red cancel-button">Decline Trade<i class="material-icons right">remove_circle</i></a>
+                        {{ end }}
+                    {{ else if (eq .Status 1) }}
+                        {{ if .FromUser $.User.UUID }}
+                            <a class="waves-effect waves-light btn red cancel-button">Check Trade<i class="material-icons right">delete_forever</i></a>
+                            <a class="waves-effect waves-light btn red cancel-button">Cancel trade<i class="material-icons right">delete_forever</i></a>
+                        {{ else }}
+                            <a class="waves-effect waves-light btn accept-button">Check Trade<i class="material-icons right">check_circle</i></a>
+                        {{ end }}
+                    {{ end }}
+                </p>
+            {{ end }}
+         </div>
+
+        {{ template "global-js" . }}
+        <script async type="text/javascript" src="/js/trade-offers.js?v2"></script>
+    </body>
+</html>

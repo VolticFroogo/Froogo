@@ -1,0 +1,75 @@
+{{ define "navbar" }}
+<!-- Navbar -->
+<nav class="orange accent-4">
+    <div class="nav-wrapper container">
+        <span class="hide-on-med-and-up">
+            <a href="/panel" class="brand-logo">Froogo</a>
+        </span>
+        <span class="hide-on-small-only">
+            <a href="/panel" class="brand-logo">Froogo</a>
+        </span>
+        <a href="#" data-target="side-bar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a>Welcome {{ .User.Fname }}</a></li>
+            <li><a href="/panel">Inventory</a></li>
+            <li><a href="/panel/trade-offers">Trade Offers</a></li>
+            <li><a href="/">Homepage</a></li>
+            <li><a onclick="$('#logout').submit();">Logout</a></li>
+        </ul>
+
+        <!-- Mobile Sidebar for Navbar -->
+        <ul id="side-bar" class="sidenav">
+            <li><a>Froogo</a></li>
+            <li><a>Welcome {{ .User.Fname }}</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Actions</a></li>
+            <li><a onclick="$('#logout').submit();">Logout</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Pages</a></li>
+            <li><a href="/">Homepage</a></li>
+            <li><a href="/panel">Inventory</a></li>
+            <li><a href="/panel/trade-offers">Trade Offers</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Logout form for Navbar -->
+<form hidden name="logout" action="/logout" method="POST" id="logout">
+    <input hidden name="csrfSecret" value="{{ .CsrfSecret }}"/>
+</form>
+{{ end }}
+
+{{ define "global-css" }}
+<!-- Import CSS -->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/global.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+<link rel="icon" type="image/png" href="/img/logo.png">
+{{ end }}
+
+{{ define "global-js" }}
+<!-- Import JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script>var CsrfSecret = "{{ .CsrfSecret }}";</script> <!-- Set CSRF Secret in JavaScript -->
+<script async type="text/javascript" src="/js/global.js"></script>
+{{ end }}
+
+{{ define "global-meta" }}
+<!-- Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+<!-- Search Engine Meta Tags -->
+<meta name="title" content="Froogo"/>
+<meta name="description" content="Froogo is a CS:GO skin trading site for 1:1 trading to safely transfer money for skins."/>
+<meta name="keywords" content="Froogo, CS:GO, Skin, Trading"/>
+<meta name="copyright" content="Copyright of Harry Billings."/>
+
+<!-- Social Media Meta Tags -->
+<meta property="og:title" content="Froogo"/>
+<meta property="og:image" content="https://froogo.co.uk/img/logo.png"/>
+<meta property="og:description" content="Froogo CS:GO skin trading."/>
+{{ end }}

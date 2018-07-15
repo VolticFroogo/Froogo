@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>Froogo | Verified Email</title>
+
+        {{ template "global-css" . }}
+
+        {{ template "global-meta" . }}
+    </head>
+
+    <body>
+        <div class="container">
+            <p class="flow-text">{{ . }} is now set to your current email. <a href="https://froogo.co.uk/panel">Back to the panel.</a></p>
+        </div>
+
+        {{ template "global-js" . }}
+    </body>
+</html>

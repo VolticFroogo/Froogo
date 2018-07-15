@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>Froogo | Panel</title>
+
+        {{ template "global-css" . }}
+
+        {{ template "global-meta" . }}
+    </head>
+
+    <body>
+        {{ template "navbar" . }}
+
+        <br>
+        <div class="container">
+            {{ if (eq .User.SteamID 0) }}
+                <p>To get started please link your steam account.</p>
+                <a href="/link/steam"><img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" alt="Sign in through Steam"></a>
+            {{ else }}
+                {{ range .Inventory.Descriptions }}
+                    <p>
+                        {{ .Name }}<br>
+                        {{ if .HasWear }}{{ .Wear }}<br>{{ end }}
+                        <span style="color: #{{ .Colour }}">{{ .Type }}</span><br>
+                        {{ if .Tradable }}<a href="/panel/trade/{{ .Classid }}">Trade</a>{{ else }}Not tradable{{ end }}
+                    </p>
+                {{ end }}
+            {{ end }}
+        </div>
+
+        {{ template "global-js" . }}
+        <script type="text/javascript" src="/js/panel.js?v20"></script>
+    </body>
+</html>
